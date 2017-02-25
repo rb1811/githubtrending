@@ -63,12 +63,11 @@ class gitdevtype(scrapy.Spider):
             print "No of contributing authors", len(s.json())
 
             data={
-
                 'project_id':r.json()['id'],
                 'project_name':r.json()['name'],
                 'forks_count':r.json()['forks_count'],
                 'stargazers':r.json()['stargazers_count'],
-                'owner_type': 'Organization',
+                'language':r.json()['language'],
                 'start_time':r.json()['created_at'],
                 'end_time': r.json()['updated_at'],
                 'contrib_authors':len(s.json()),
