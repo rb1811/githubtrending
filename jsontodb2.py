@@ -23,7 +23,7 @@ for i in range(len(obj)):
 		start_time= s_time[:s_time.find('T')]
 		update_time=u_time[:u_time.find('T')]
 
-		if conn.execute( 'INSERT INTO DEVELOPERS(PROJECT_ID,PROJECT_NAME,LANGUAGE,ORGAN,FORKS,STARS,CONTRIBUTING_AUTH,START_TIME,UPDATED_TIME) VALUES (?,?,?,?,?,?,?,?,?)', [project_id,project_name,language,owner_type,forks,stars,contrib_auth,start_time,update_time]):
+		if conn.execute( 'INSERT INTO developers(PROJECT_ID,PROJECT_NAME,LANGUAGE,ORGAN,FORKS,STARS,CONTRIBUTING_AUTH,START_TIME,UPDATED_TIME) VALUES (?,?,?,?,?,?,?,?,?)', [project_id,project_name,language,owner_type,forks,stars,contrib_auth,start_time,update_time]):
 			print "Success"
 			conn.commit()
 		else:
