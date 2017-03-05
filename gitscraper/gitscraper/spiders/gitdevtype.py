@@ -21,17 +21,17 @@ class gitdevtype(scrapy.Spider):
             titles[titles.index(ele)]= ele.encode('ascii','ignore').strip() 
 
         for ele in titles:
-            curruser_api_url=self.user_api_url+ele+'?access_token=5128abbf1346ea3a3a39bbd4bc4f1bf58eef78e1'
+            curruser_api_url=self.user_api_url+ele+'?access_token=ae4dbc893ea4a97dfc835fb58c235ec7e8210664'
             r=requests.get(curruser_api_url)
             if(r.json()['type'] != "Organization"):
                 titles.remove(ele)
 
         for ele in titles:
-            flag=False
-            lastpage=''
-            organisations_projects=[]
-            next_page='https://github.com' + ele + '?page=1'
-            yield scrapy.Request('https://github.com' + ele + '?page=1', callback=self.save_file)
+            self.flag=False
+            self.lastpage=''
+            self.organisations_projects=[]
+            self.next_page='https://github.com' + ele + '?page=1'
+            yield scrapy.Request(self.next_page, callback=self.save_file)
 
 
     def save_file(self, response):
@@ -51,35 +51,35 @@ class gitdevtype(scrapy.Spider):
         for ele in titles:
             titles[titles.index(ele)]= ele.encode('ascii','ignore').strip()
  
-
+        r={}
         for ele in titles:
             data={}
             current_repo_url=self.repo_api_url+ele+'?access_token=5128abbf1346ea3a3a39bbd4bc4f1bf58eef78e1'
             print "current repo url", current_repo_url
             r=requests.get(current_repo_url)
-
+            # t=r
             apicall2_url=r.json()['contributors_url'].encode('ascii','ignore')+'?access_token=ae4dbc893ea4a97dfc835fb58c235ec7e8210664'
             s=requests.get(apicall2_url)
             print "No of contributing authors", len(s.json())
-
-            data={
-                'project_id':r.json()['id'],
-                'project_name':r.json()['name'],
-                'forks_count':r.json()['forks_count'],
-                'stargazers':r.json()['stargazers_count'],
-                'language':r.json()['language'],
-                'start_time':r.json()['created_at'],
-                'end_time': r.json()['updated_at'],
-                'contrib_authors':len(s.json()),
-            }
-            self.organisations_projects.append(data)
+            if r.json()['language']:
+                data={
+                    'project_id':r.json()['id'],
+                    'project_name':r.json()['name'],
+                    'forks_count':r.json()['forks_count'],
+                    'stargazers':r.json()['stargazers_count'],
+                    'language':r.json()['language'],
+                    'start_time':r.json()['created_at'],
+                    'end_time': r.json()['updated_at'],
+                    'contrib_authors':len(s.json()),
+                }
+                self.organisations_projects.append(data)
 
         if not self.onepage_flag and self.next_page[self.next_page.index('=')+1:] != self.lastpage:
             self.next_page=self.next_page[:self.next_page.index('=')+1] +str(int(self.next_page[self.next_page.index('=')+1:])+1)
             print "This is the next page", self.next_page
             next_url = response.urljoin(self.next_page)
             yield scrapy.Request(next_url, callback=self.save_file)
-        else:
-            yield{
+        
+        yield{
                r.json()['owner']['login']:self.organisations_projects
             }
