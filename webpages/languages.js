@@ -60,7 +60,10 @@ var svg = d3.select(".bubbleChart").append("svg")
       .text(function(d) { return d.name+ ": " +d.value });
 
   node.append("circle")
-      .attr("r", function(d) { return d.r; });
+      .attr("r", function(d) { return d.r; })
+      .on("click", function(d) {
+        alert("on click" );
+    });
 
   node.append("text")
       .text(function(d) { return d.name; })
