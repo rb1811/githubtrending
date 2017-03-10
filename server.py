@@ -1,16 +1,19 @@
 from flask import Flask, jsonify,make_response
 import sqlite3
 from flask import request
+from flask_cors import CORS, cross_origin
 
 gitscrapy = Flask(__name__)
+cors = CORS(gitscrapy, resources={"/server": {"origins": "*"}})
+gitscrapy.config['CORS_HEADERS'] = 'Content-Type'
 
 @gitscrapy.route('/server', methods=['POST'])
 def call_server():
-	
 	if not request.json or not 'title' in request.json:
-		return make_response(jsonify({'error': 'Request body Not found'}), 404)
+		return make_response(jsonify({'error': 'Request body Not foundy'}), 404)
 	if request.json['title'].encode('ascii','unicode').strip() == 'languages':
 		conn = sqlite3.connect('github.db')
+		print "Connection to db success"
 		cur = conn.cursor()
 		sql =  'select LANGUAGE, count(*) from languages group by LANGUAGE'
 		cur.execute(sql)
@@ -59,7 +62,6 @@ def call_server():
 		for i in range(len(temp_rows)):
 			current_company  =  temp_rows[i][0]
 			current_company_lang  =  temp_rows[i][1]
-			# print current_company, current_company_lang
 			if current_company not in rows:
 				rows[current_company] = {}
 				if current_company_lang not in rows[current_company]:
@@ -74,7 +76,7 @@ def call_server():
 
 		return make_response(jsonify({'data':rows}),200) 
 	else:
-		return make_response(jsonify({'error': ' Request body key not proper for this one'}), 404)
+		return make_response(jsonify({'error': 'Bad Request'}), 400)
 
 if __name__ == '__main__':
 	gitscrapy.run(debug = True)

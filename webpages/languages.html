@@ -8,8 +8,6 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport"
 	content="width=device-width, shrink-to-fit=no, initial-scale=1">
-	<meta name="description" content="">
-	<meta name="author" content="">
 
 	<title>Github Trending</title>
 
@@ -25,11 +23,36 @@
 	<!-- Bootstrap Core JavaScript -->
 	<script src="assets/js/bootstrap.min.js"></script>
 
+	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,200italic,600italic&subset=latin,vietnamese' rel='stylesheet' type='text/css'>
+		<script src="https://d3js.org/d3.v3.min.js"></script>
+	  <script src="languages.js"></script>
+	  
 
-	<script type="text/javascript">
+<style>
+    text {
+  font: 24px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-anchor: middle;
+  pointer-events: none;
+}
 
-	</script>
+circle {
+  fill: #ccc;
+}
 
+.node:hover circle {
+  fill: orange;
+}
+/*
+.bubbleChart{
+  padding-top : 15px;
+
+}*/
+/*
+svg{
+  padding-top : 5px;
+  padding-bottom : 55px;
+}*/
+</style>
 
 </head>
 
@@ -56,22 +79,20 @@
 		<div class="container-fluid">
 			<ul class="nav nav-tabs nav-justified" role="tablist">
 
-				<li><a data-toggle="tab" href="#firsttab">All languges</a></li>
-				<li><a data-toggle="tab" href="#secondtab">Particular language</a></li>
+				<li><a data-toggle="tab" href="#firsttab">Trending Programming Languages</a></li>
+				<li><a data-toggle="tab" href="#secondtab">Simple Dashboard</a></li>
 
 			</ul>
 			<div class="tab-content">
 				<div id="firsttab" class="tab-pane fade in active">
-					<h2>Bubble Chart</h2>
-					<div id="bubblechart">
-						<h3>Canvas for bubble chart will come here</h3>
-					</div>
+						
+							<div  class="bubbleChart"></div>
 				</div>
+
+
 				<div id="secondtab" class="tab-pane fade ">
-					<h2>Simple Dashboard</h2>
-					<h3>
-						Canvas for simple dashboard chart will come here
-					</h3>
+					
+					<h3>Canvas for simple dashboard chart will come here</h3>
 				</div>
 			</div>		
 		</div>
