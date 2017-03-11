@@ -25,7 +25,7 @@ function callapi(){
   }
 
 function makeGraph(data){
- console.log(data);
+ // console.log(data);
 
 for (i =0;i<data['data'].length;i++){
   json['children'].push({"name": data['data'][i][0],"size":data['data'][i][1].toString()})

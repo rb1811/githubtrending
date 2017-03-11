@@ -1,16 +1,13 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
-	<!-- <c:url var="home" value="/" scope="request" /> -->
+
 
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport"
 	content="width=device-width, shrink-to-fit=no, initial-scale=1">
-	<meta name="description" content="">
-	<meta name="author" content="">
-
+	
 	<title>Github Trending</title>
 
 	<!-- Bootstrap Core CSS -->
@@ -25,11 +22,32 @@
 	<!-- Bootstrap Core JavaScript -->
 	<script src="assets/js/bootstrap.min.js"></script>
 
+	<script src="https://d3js.org/d3.v3.min.js"></script>
+	<script src="developers.js"></script>
 
-	<script type="text/javascript">
 
-	</script>
+<style type="text/css">
+	
+.node {
+  cursor: pointer;
+}
 
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.node text {
+  font: 10px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}	
+</style>
 
 </head>
 
@@ -62,11 +80,12 @@
 			</ul>
 			<div class="tab-content">
 				<div id="firsttab" class="tab-pane fade in active">
-					<h2>Cluster Dendogram</h2>
-					<div id="bubblechart">
-						<h3>Canvas for Cluster Dendogram will come here</h3>
+					<div class="clusterdendrogram">
 					</div>
 				</div>
+				
+
+
 				<div id="secondtab" class="tab-pane fade ">
 					<h2>Comparsion between two developers</h2>
 					<h3>

@@ -2,6 +2,7 @@ from flask import Flask, jsonify,make_response
 import sqlite3
 from flask import request
 from flask_cors import CORS, cross_origin
+import json
 
 gitscrapy = Flask(__name__)
 cors = CORS(gitscrapy, resources={"/server": {"origins": "*"}})
@@ -30,7 +31,6 @@ def call_server():
 		temp_rows = cur.fetchall()
 		conn.close()
 		rows={}
-		keys= ['project_name','forks','stars','contributing_auth','start_time','updated_time']
 		for i in range(len(temp_rows)):
 			current_company = temp_rows[i][0]
 			current_company_lang =  temp_rows[i][1]
@@ -38,17 +38,28 @@ def call_server():
 				rows[current_company] = {}
 				if current_company_lang not in rows[current_company]:
 					rows[current_company][current_company_lang] = []
-					rows[current_company][current_company_lang].append(  dict(zip(keys,temp_rows[i][2:]))  )
-				else:	
-					rows[current_company][current_company_lang].append(  dict(zip(keys,temp_rows[i][2:]))  )
+					rows[current_company][current_company_lang].append( {"name":temp_rows[i][2].encode('ascii','ignore'),"forks":temp_rows[i][3],"stars":temp_rows[i][4],"contributing_auth":temp_rows[i][5],"start_time":temp_rows[i][6].encode('ascii','ignore'),"updated_time":temp_rows[i][7].encode('ascii','ignore')}  )
+				else:
+					rows[current_company][current_company_lang].append( {"name":temp_rows[i][2].encode('ascii','ignore'),"forks":temp_rows[i][3],"stars":temp_rows[i][4],"contributing_auth":temp_rows[i][5],"start_time":temp_rows[i][6].encode('ascii','ignore'),"updated_time":temp_rows[i][7].encode('ascii','ignore')}  )
 			else:
 				if current_company_lang not in rows[current_company]:
 					rows[current_company][current_company_lang] = []
-					rows[current_company][current_company_lang].append(  dict(zip(keys,temp_rows[i][2:]))  )
+					rows[current_company][current_company_lang].append( {"name":temp_rows[i][2].encode('ascii','ignore'),"forks":temp_rows[i][3],"stars":temp_rows[i][4],"contributing_auth":temp_rows[i][5],"start_time":temp_rows[i][6].encode('ascii','ignore'),"updated_time":temp_rows[i][7].encode('ascii','ignore')}  )
 				else:	
-					rows[current_company][current_company_lang].append(  dict(zip(keys,temp_rows[i][2:]))  )
+					rows[current_company][current_company_lang].append( {"name":temp_rows[i][2].encode('ascii','ignore'),"forks":temp_rows[i][3],"stars":temp_rows[i][4],"contributing_auth":temp_rows[i][5],"start_time":temp_rows[i][6].encode('ascii','ignore'),"updated_time":temp_rows[i][7].encode('ascii','ignore')}  )
 
-		return make_response(jsonify({'data':rows}),200) 
+		final_rows = {"name":"Github Developers", "children" : []}
+		for comp_key in rows.keys():
+			temp_dict =  {"name": comp_key.encode('ascii','ignore'), "children":[]}
+			for lang_key in rows[comp_key].keys():
+				temp_dict2 = {"name": lang_key.encode('ascii','ignore'), "children": []}
+				for i in range(len(rows[comp_key][lang_key])):
+					temp_dict2["children"].append(rows[comp_key][lang_key][i])
+				temp_dict["children"].append(temp_dict2)
+			final_rows["children"].append(temp_dict)
+
+
+		return make_response(jsonify({'data':str(final_rows)}),200)  
 
 	elif request.json['title'].encode('ascii','unicode').strip() == 'dev_comp':
 		conn = sqlite3.connect('github.db')
