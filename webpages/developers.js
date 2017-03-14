@@ -172,8 +172,50 @@ function click(d) {
 }
 }
 
+function getcompanylist(){
+  postdata={
+            title:"comp_list"
+          }
+          var dataString = JSON.stringify(postdata);
+          
+          $.ajax({
+            
+             url: 'http://127.0.0.1:5000/server',
+             type: 'POST',
+             data: dataString,
+             success: function(data) {  fillfropdown(data);},
+             contentType: "application/json",
+             dataType: 'json'
+          });
 
+}
+
+function fillfropdown(data){
+
+var companies = data['data'];     
+// console.log(companies);
+var sel1 = document.getElementById('list1');
+var sel2 = document.getElementById('list2');
+
+for(var i = 0; i < companies.length; i++) {
+    var opt = document.createElement('option');
+    opt.innerHTML = companies[i];
+    opt.value = companies[i];
+    sel1.appendChild(opt);
+    
+}
+
+
+for(var i = 0; i < companies.length; i++) {
+    var opt = document.createElement('option');
+    opt.innerHTML = companies[i];
+    opt.value = companies[i];
+    sel2.appendChild(opt);
+  }
+
+}
 
 $(document).ready(function () {
   callapi();
+  getcompanylist();
 });

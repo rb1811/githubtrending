@@ -24,6 +24,7 @@
 
 	<script src="https://d3js.org/d3.v3.min.js"></script>
 	<script src="developers.js"></script>
+	<script src="comp_compare.js"></script>
 
 
 <style type="text/css">
@@ -47,6 +48,55 @@
   stroke: #ccc;
   stroke-width: 1.5px;
 }	
+
+
+.chart {
+            margin: 5px;
+            padding-top: 2px;
+            /*padding-bottom: 10px */
+        }
+
+        .chart .right {
+            stroke: white;
+            fill: indianred;
+        }
+
+        .chart .left {
+            stroke: white;
+            fill: steelblue;
+        }
+
+        .chart rect:hover {
+            fill: #64707d;
+        }
+
+        .chart text {
+            fill: #24da82;
+        }
+
+        .chart text.name {
+            fill: black;
+        }
+
+        .chart text.title {
+            fill: #2216ff;
+        }
+
+   .twosided {
+   	margin: 10px;
+   	padding-top: 10px;
+   	padding-bottom: 10px;
+
+   }     
+
+ .ringchart{
+margin: 10px;
+   	padding-top: 20px;
+   	padding-bottom: 10px;
+
+
+ }  
+
 </style>
 
 </head>
@@ -79,18 +129,63 @@
 
 			</ul>
 			<div class="tab-content">
-				<div id="firsttab" class="tab-pane fade in active">
+				<div id="firsttab" class="tab-pane fade ">
 					<div class="clusterdendrogram">
 					</div>
 				</div>
 				
 
+				<br/><br/>
+				<div id="secondtab" class="tab-pane fade in active">
+							<div class = "row">
+							<div class = "col-sm-5" class = "col-lg-5" class = "col-md-5">
+							<label for="company1">Company 1</label>
+      							<select class="form-control" id="list1" >
+						      </select>
+				      </div>
+				      
+				      <div class = "col-sm-1" class = "col-lg-1" class = "col-md-1" onclick="getdetials()">
+				      <br/> 	
+				      	<button type="button" class="btn btn-primary">Get Details</button>
+				      </div>
 
-				<div id="secondtab" class="tab-pane fade ">
-					<h2>Comparsion between two developers</h2>
-					<h3>
-						Canvas for 4th chart will come here
-					</h3>
+				      <div class = "col-sm-6" class = "col-lg-6" class = "col-md-6">
+							<label for="company2">Company 2</label>
+      							<select class="form-control" id="list2" >
+						      </select>
+				      </div>
+				</div>
+				
+				<div class = "col-sm-12" class = "col-lg-12" class = "col-md-12">
+				<div class="twosided"></div>
+				</div>
+				
+
+				<div class = "row" class = "ringchart" >
+			
+				
+				<div class = "col-sm-6" class = "col-lg-6" class = "col-md-6">
+				<div class = "col-sm-4" class = "col-lg-4" class = "col-md-4">
+				</div> 
+				<div class = "col-sm-2" class = "col-lg-2" class = "col-md-2"> 
+				<div class ="ringcompany1"></div>
+					</div>
+				</div>
+
+				<div class = "col-sm-6" class = "col-lg-6" class = "col-md-6">
+				<div class = "col-sm-4" class = "col-lg-4" class = "col-md-4">
+				</div> 
+				<div class = "col-sm-2" class = "col-lg-2" class = "col-md-2"> 
+				<div class ="ringcompany2"></div>
+					</div>
+				</div>
+
+				
+
+					</div>
+
+
+
 				</div>
 			</div>		
 		</div>

@@ -86,6 +86,56 @@ def call_server():
 					rows[current_company][current_company_lang] = temp_rows[i][2]
 
 		return make_response(jsonify({'data':rows}),200) 
+
+	elif request.json['title'].encode('ascii','unicode').strip() == 'comp_list':
+		conn = sqlite3.connect('github.db')
+		print "Database connection success"
+		cur = conn.cursor()
+		sql =  'select distinct organ from developers;'
+		cur.execute(sql)
+		temp_rows = cur.fetchall();
+		conn.close()
+		return make_response(jsonify({'data':temp_rows}),200)  
+
+	elif request.json['title'].encode('ascii','unicode').strip() == 'twocompanies':
+		conn = sqlite3.connect('github.db')
+		print "Database connection success"
+		cur = conn.cursor()
+		company1 = request.json['company1'].encode('ascii','ignore')
+		company2 = request.json['company2'].encode('ascii','ignore')
+		sql =  'select organ,language, count(*) from developers where organ = "'+company1 +'" or organ = "'+company2+'" group by organ, language'
+		cur.execute(sql)
+		temp_rows = cur.fetchall();
+		conn.close()
+		rows= {}
+		for i in range(len(temp_rows)):
+			if temp_rows[i][1] not in rows:
+				rows[temp_rows[i][1].encode('ascii','ignore')] = []
+				rows[temp_rows[i][1].encode('ascii','ignore')].append( [temp_rows[i][0].encode('ascii','ignore'),temp_rows[i][2]] )
+			else: 
+				rows[temp_rows[i][1].encode('ascii','ignore')].append( [temp_rows[i][0].encode('ascii','ignore'),temp_rows[i][2]] )
+
+		final_rows = []
+		for key in rows.keys():
+			temp_dict = {}
+			temp_dict = {"languages": key}
+			if len(rows[key]) == 2:
+				temp_dict[rows[key][0][0]] = rows[key][0][1]
+				temp_dict[rows[key][1][0]] = rows[key][1][1]
+			else:
+				if rows[key][0][0] ==  company1:
+					temp_dict[company2] = 0
+					temp_dict[company1] = rows[key][0][1] 
+				else: 
+					temp_dict[company1] = 0
+					temp_dict[company2] = rows[key][0][1]
+			final_rows.append(temp_dict)		
+
+		return make_response(jsonify({'data':final_rows}),200)  
+
+
+		
+
 	else:
 		return make_response(jsonify({'error': 'Bad Request'}), 400)
 
