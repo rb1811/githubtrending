@@ -30,7 +30,7 @@ function makeGraph(data){
 for (i =0;i<data['data'].length;i++){
   json['children'].push({"name": data['data'][i][0],"size":data['data'][i][1].toString()})
 }
- console.log(json['children'].length);
+ // console.log(json['children'].length);
 
 
 var bleed = 100,
@@ -85,7 +85,8 @@ function flatten(root) {
 }
 }
 
-
+// Ruk call kar raa
 $(document).ready(function () {
+  
   callapi();
 });

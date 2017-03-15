@@ -11,20 +11,41 @@
 	<title>Github Trending</title>
 
 	<!-- Bootstrap Core CSS -->
-	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+	<!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
 
 
 	<!-- Custom CSS -->
-	<link href="assets/css/simple-sidebar.css" rel="stylesheet">
+	<!-- <link href="css/simple-sidebar.css" rel="stylesheet"> -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/simple-sidebar.css') }}">
+
+
 	<!-- jQuery -->
-	<script src="assets/js/jquery.js"></script>
+	<script type = "text/javascript" src = "{{ url_for('static', filename = 'js/jquery.js') }}" >
+		
+
+	</script>
 
 	<!-- Bootstrap Core JavaScript -->
-	<script src="assets/js/bootstrap.min.js"></script>
+	<script type = "text/javascript" src = "{{ url_for('static', filename = 'js/bootstrap.min.js') }}" >
+		
+	</script>
 
-	<script src="https://d3js.org/d3.v3.min.js"></script>
-	<script src="developers.js"></script>
-	<script src="comp_compare.js"></script>
+	<script type = "text/javascript" src = "{{ url_for('static', filename = 'js/d3.v3.min.js') }}">
+		
+		// src = "{{ url_for('static', filename = 'https://d3js.org/d3.v3.min.js') }}"
+	
+		
+		
+	</script>
+
+	<script type = "text/javascript" src = "{{ url_for('static', filename = 'js/developers.js') }}">
+		
+	</script>
+
+	<script type = "text/javascript" src = "{{ url_for('static', filename = 'js/comp_compare.js') }}">
+		
+	</script>
 
 
 <style type="text/css">
@@ -50,42 +71,38 @@
 }	
 
 
-.chart {
-            margin: 5px;
-            padding-top: 2px;
-            /*padding-bottom: 10px */
-        }
 
-        .chart .right {
+
+        .twosided .right {
             stroke: white;
             fill: indianred;
         }
 
-        .chart .left {
+        .twosided .left {
             stroke: white;
             fill: steelblue;
         }
 
-        .chart rect:hover {
+        .twosided rect:hover {
             fill: #64707d;
         }
 
-        .chart text {
+        .twosided text {
             fill: #24da82;
         }
 
-        .chart text.name {
+        .twosided text.name {
             fill: black;
         }
 
-        .chart text.title {
+        .twosided text.title {
             fill: #2216ff;
         }
 
    .twosided {
-   	margin: 10px;
-   	padding-top: 10px;
-   	padding-bottom: 10px;
+   	margin: 20px;
+   	/*padding-top: 10px;*/
+   	/*padding-bottom: 10px;*/
 
    }     
 
@@ -113,10 +130,10 @@ margin: 10px;
 					<a href="#">GitHub Trending</a>
 				</li>
 				<li>
-					<a href="languages.html">Languages</a>
+					<a href="languages">Languages</a>
 				</li>
 				<li>
-					<a href="developers.html">Developers</a>
+					<a href="developers">Developers</a>
 				</li>
 			</ul>
 		</div>
@@ -144,20 +161,20 @@ margin: 10px;
 						      </select>
 				      </div>
 				      
-				      <div class = "col-sm-1" class = "col-lg-1" class = "col-md-1" onclick="getdetials()">
+				      <div class = "col-sm-2" class = "col-lg-2" class = "col-md-2" onclick="getdetials()">
 				      <br/> 	
-				      	<button type="button" class="btn btn-primary">Get Details</button>
+				      	<button type="button" class="btn btn-primary btn-block">Get Details</button>
 				      </div>
 
-				      <div class = "col-sm-6" class = "col-lg-6" class = "col-md-6">
+				      <div class = "col-sm-5" class = "col-lg-5" class = "col-md-5">
 							<label for="company2">Company 2</label>
       							<select class="form-control" id="list2" >
 						      </select>
 				      </div>
 				</div>
 				
-				<div class = "col-sm-12" class = "col-lg-12" class = "col-md-12">
-				<div class="twosided"></div>
+				<div class = "col-sm-12" class = "col-lg-12" class = "col-md-12" >
+				<svg class="twosided"></svg>
 				</div>
 				
 
@@ -165,18 +182,18 @@ margin: 10px;
 			
 				
 				<div class = "col-sm-6" class = "col-lg-6" class = "col-md-6">
-				<div class = "col-sm-4" class = "col-lg-4" class = "col-md-4">
+				<div class = "col-sm-2" class = "col-lg-2" class = "col-md-2">
 				</div> 
-				<div class = "col-sm-2" class = "col-lg-2" class = "col-md-2"> 
-				<div class ="ringcompany1"></div>
+				<div class = "col-sm-4" class = "col-lg-4" class = "col-md-4"> 
+				<svg class ="ringcompany1"></svg>
 					</div>
 				</div>
 
 				<div class = "col-sm-6" class = "col-lg-6" class = "col-md-6">
-				<div class = "col-sm-4" class = "col-lg-4" class = "col-md-4">
+				<div class = "col-sm-2" class = "col-lg-2" class = "col-md-2">
 				</div> 
-				<div class = "col-sm-2" class = "col-lg-2" class = "col-md-2"> 
-				<div class ="ringcompany2"></div>
+				<div class = "col-sm-4" class = "col-lg-4" class = "col-md-4">  
+				<svg class ="ringcompany2"></svg>
 					</div>
 				</div>
 

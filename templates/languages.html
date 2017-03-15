@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-	
 
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,20 +11,32 @@
 	<title>Github Trending</title>
 
 	<!-- Bootstrap Core CSS -->
-	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+	<!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
 
 
 	<!-- Custom CSS -->
-	<link href="assets/css/simple-sidebar.css" rel="stylesheet">
-	<!-- jQuery -->
-	<script src="assets/js/jquery.js"></script>
-
-	<!-- Bootstrap Core JavaScript -->
-	<script src="assets/js/bootstrap.min.js"></script>
+	<!-- <link href="css/simple-sidebar.css" rel="stylesheet"> -->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/simple-sidebar.css') }}">
+<!-- 
+<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 
 	<script src="https://d3js.org/d3.v3.min.js"></script>
-	<script src="languages.js"></script>
-	  
+	<script src="developers.js"></script>
+	<script src="comp_compare.js"></script> -->
+
+
+
+	<script type = "text/javascript" src = "{{ url_for('static', filename = 'js/jquery.js') }}"></script>
+
+
+	<script type = "text/javascript" src = "{{ url_for('static', filename = 'js/bootstrap.min.js') }}" ></script>
+
+	<script type = "text/javascript" src = "{{ url_for('static', filename = 'js/d3.v3.min.js') }}" > </script>
+
+	<script type = "text/javascript" src = "{{ url_for('static', filename = 'js/languages.js') }}" ></script>
+  
 
 <style>
     text {
@@ -56,7 +67,6 @@ svg{
 </head>
 
 <body>
-
 	<div id="wrapper">
 
 		<!-- Sidebar -->
@@ -67,10 +77,10 @@ svg{
 					<a href="#">GitHub Trending</a>
 				</li>
 				<li>
-					<a href="languages.html">Languages</a>
+					<a href="languages">Languages</a>
 				</li>
 				<li>
-					<a href="developers.html">Developers</a>
+					<a href="developers">Developers</a>
 				</li>
 			</ul>
 		</div>
@@ -84,7 +94,6 @@ svg{
 			</ul>
 			<div class="tab-content">
 				<div id="firsttab" class="tab-pane fade in active">
-						
 							<div  class="bubbleChart"></div>
 				</div>
 

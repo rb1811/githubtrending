@@ -1,6 +1,6 @@
     function doublebarchart(data) {
     key_array=Object.keys(data[0])
-      // console.log(data1);
+      // console.log(key_array);
       // console.log(data);
       // // key_array=Object.keys(data[0])
         var labelArea = 150;
@@ -9,29 +9,23 @@
             bar_height = 20,
             height = bar_height * data.length;
     var rightOffset = width + labelArea;
+    var lCol = document.getElementById('list1').value
+    var rCol  = document.getElementById('list2').value
+    // for ( i = 0; i < key_array.length;i++){
+    //   if (key_array[i] != 'languages' && !lCol)
+    //   {
+    //     lCol = key_array[i].toString();
+    //   }
+    //   else{
+    //     rCol = key_array[i].toString();
+    //   }
+    // }
 
-    var lCol = ''
-    var rCol  = ''
-    for ( i = 0; i < key_array.length;i++){
-      if (key_array[i] != 'langauge' && !lCol)
-      {
-        lCol = key_array[i].toString();
-      }
-      else{
-
-        rCol = key_array[i].toString();
-      }
-    }
-
-    // console.log(lCol,rCol);
-
-    // var lCol = "google";
-    // var rCol = "tensorflow";
-   
+     // console.log(lCol,rCol);
 
         var chart = d3.select(".twosided")
-                .append('svg')
-                .attr('class', 'chart')
+                // .append('svg')
+                // .attr('class', 'chart')
                 .attr('width', labelArea + width + width)
                 .attr('height', height);
 
@@ -49,13 +43,13 @@
         var y = d3.scale.ordinal()
         .domain(data.map(function (d){
             return d.languages
-            // return d.langauge
+          
         }))
         .rangeBands([20, height]);    
 
          var yPosByIndex = function (d) {
          return y(d.languages);
-         // return y(d.langauge)
+         
         };
 
          chart.selectAll("rect.left")
@@ -84,7 +78,7 @@
                 })
                 .attr("y", function (d) {
                     return y(d.languages) + y.rangeBand() / 2;
-                    // return y(d.langauge) + y.rangeBand() / 2;
+                    
                 })
                 .attr("dx", "20")
                 .attr("dy", ".36em")
@@ -98,14 +92,14 @@
                 .attr("x", (labelArea / 2) + width)
                 .attr("y", function (d) {
                     return y(d.languages) + y.rangeBand() / 2;
-                    // return y(d.langauge) + y.rangeBand() / 2;
+                   
                 })
                 .attr("dy", ".20em")
                 .attr("text-anchor", "middle")
                 .attr('class', 'name')
                 .text(function(d){
                   return d.languages;
-                  // return d.langauge;
+               
                 });
        
         
@@ -130,7 +124,7 @@
                 })
                 .attr("y", function (d) {
                     return y(d.languages) + y.rangeBand() / 2;
-                    // return y(d.langauge) + y.rangeBand() / 2;
+           
                 })
                 .attr("dx", -5)
                 .attr("dy", ".36em")
@@ -142,19 +136,26 @@
         chart.append("text").attr("x",width/3+rightOffset).attr("y", 10).attr("class","title").text(rCol);
         chart.append("text").attr("x",width+labelArea/3).attr("y", 10).attr("class","title").text("languages");
 
-        ringchart1();
-        ringchart2();
+        ringchart1(data);
+        ringchart2(data);
 
     }
 
 
 
-function ringchart1(){
+function ringchart1(data){
+  // console.log(data);
+  var dataset =[]
+  for (i=0;i<data.length;i++)
+  {
+    if( data[i][document.getElementById('list1').value] )
+    dataset.push(data[i][document.getElementById('list1').value])
+  }
 
-var w = 200;
+var w = 300;
       var h = 300;
-
-      var dataset = [ 5, 10, 20, 45, 6, 25 ];
+      // console.log('dataset1',dataset);
+      // var dataset = [ 5, 10, 20, 45, 6, 25 ];
 
       var outerRadius = w / 2;
       var innerRadius = w / 3;
@@ -165,11 +166,11 @@ var w = 200;
       var pie = d3.layout.pie();
       
       //Easy colors accessible via a 10-step ordinal scale
-      var color = d3.scale.category10();
+      var color = d3.scale.category20();
 
       //Create SVG element
       var svg = d3.select(".ringcompany1")
-            .append("svg")
+            // .append("svg")
             .attr("width", w)
             .attr("height", h);
       
@@ -202,12 +203,19 @@ var w = 200;
 
 }
 
-function ringchart2(){
 
-var w = 200;
+function ringchart2(data){
+  // console.log(data);
+  var dataset =[]
+  for (i=0;i<data.length;i++)
+  {if( data[i][document.getElementById('list2').value] )
+    dataset.push(data[i][document.getElementById('list2').value])
+  }
+  // console.log('dataset2',dataset);
+var w = 300;
       var h = 300;
 
-      var dataset = [ 15, 10, 20, 45, 6, 2 ];
+      // var dataset = [ 15, 10, 20, 45, 6, 2 ];
 
       var outerRadius = w / 2;
       var innerRadius = w / 3;
@@ -222,7 +230,7 @@ var w = 200;
 
       //Create SVG element
       var svg = d3.select(".ringcompany2")
-            .append("svg")
+            // .append("svg")
             .attr("width", w)
             .attr("height", h);
       
@@ -280,7 +288,9 @@ function getdetials()
              url: 'http://127.0.0.1:5000/server',
              type: 'POST',
              data: dataString,
-             success: function(data) {  doublebarchart(data['data']);},
+             success: function(data) { 
+              d3.selectAll("svg > *").remove();
+              doublebarchart(data['data']);},
              contentType: "application/json",
              dataType: 'json'
           });

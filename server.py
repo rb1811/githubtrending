@@ -1,4 +1,4 @@
-from flask import Flask, jsonify,make_response
+from flask import Flask, jsonify,make_response,render_template, url_for
 import sqlite3
 from flask import request
 from flask_cors import CORS, cross_origin
@@ -7,6 +7,16 @@ import json
 gitscrapy = Flask(__name__)
 cors = CORS(gitscrapy, resources={"/server": {"origins": "*"}})
 gitscrapy.config['CORS_HEADERS'] = 'Content-Type'
+
+@gitscrapy.route('/')
+@gitscrapy.route('/languages')
+def openlanguages():	
+	return render_template('languages.html')
+
+@gitscrapy.route('/developers')
+def opendevelopers():	
+	return render_template('developers.html')
+
 
 @gitscrapy.route('/server', methods=['POST'])
 def call_server():
@@ -114,7 +124,7 @@ def call_server():
 				rows[temp_rows[i][1].encode('ascii','ignore')].append( [temp_rows[i][0].encode('ascii','ignore'),temp_rows[i][2]] )
 			else: 
 				rows[temp_rows[i][1].encode('ascii','ignore')].append( [temp_rows[i][0].encode('ascii','ignore'),temp_rows[i][2]] )
-
+		print rows
 		final_rows = []
 		for key in rows.keys():
 			temp_dict = {}
@@ -130,11 +140,8 @@ def call_server():
 					temp_dict[company1] = 0
 					temp_dict[company2] = rows[key][0][1]
 			final_rows.append(temp_dict)		
-
+		print final_rows
 		return make_response(jsonify({'data':final_rows}),200)  
-
-
-		
 
 	else:
 		return make_response(jsonify({'error': 'Bad Request'}), 400)
