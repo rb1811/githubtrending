@@ -141,8 +141,32 @@ def call_server():
 					temp_dict[company2] = rows[key][0][1]
 			final_rows.append(temp_dict)		
 		print final_rows
-		return make_response(jsonify({'data':final_rows}),200)  
+		return make_response(jsonify({'data':final_rows}),200)
 
+	elif request.json['title'].encode('ascii','unicode').strip() == 'dashboard':
+		conn = sqlite3.connect('github.db')
+		print "Database connection success"
+		cur = conn.cursor()
+		language = request.json['lang']
+		sql =  'select project_id, project_name,stars,forks,owner_type,contributing_auth, start_time, updated_time organ from languages where  language ="'+ language+'";'
+		print sql
+		cur.execute(sql)
+		temp_rows = cur.fetchall();
+		conn.close()
+		final_rows= []
+		for i in range(len(temp_rows)):
+			temp_dict = {language:'', 'stats':{}}
+			temp_dict[language] = temp_rows[i][1]
+			temp_dict['stats']['stars'] = temp_rows[i][2]
+			temp_dict['stats']['forks'] = temp_rows[i][3]
+			temp_dict['stats']['owner_type'] = temp_rows[i][4]
+			temp_dict['stats']['contrib_auth'] = temp_rows[i][5]
+			temp_dict['stats']['start_time'] = temp_rows[i][6]
+			temp_dict['stats']['end_time'] = temp_rows[i][7]
+			temp_dict['stats']['project_id'] = temp_rows[i][0]
+			final_rows.append(temp_dict)
+		print final_rows
+		return make_response(jsonify({'data':final_rows}),200) 
 	else:
 		return make_response(jsonify({'error': 'Bad Request'}), 400)
 
