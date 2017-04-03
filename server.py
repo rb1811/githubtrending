@@ -124,7 +124,7 @@ def call_server():
 				rows[temp_rows[i][1].encode('ascii','ignore')].append( [temp_rows[i][0].encode('ascii','ignore'),temp_rows[i][2]] )
 			else: 
 				rows[temp_rows[i][1].encode('ascii','ignore')].append( [temp_rows[i][0].encode('ascii','ignore'),temp_rows[i][2]] )
-		print rows
+		# print rows
 		final_rows = []
 		for key in rows.keys():
 			temp_dict = {}
@@ -140,7 +140,7 @@ def call_server():
 					temp_dict[company1] = 0
 					temp_dict[company2] = rows[key][0][1]
 			final_rows.append(temp_dict)		
-		print final_rows
+		# print final_rows
 		return make_response(jsonify({'data':final_rows}),200)
 
 	elif request.json['title'].encode('ascii','unicode').strip() == 'dashboard':
@@ -149,7 +149,7 @@ def call_server():
 		cur = conn.cursor()
 		language = request.json['lang']
 		sql =  'select project_id, project_name,stars,forks,owner_type,contributing_auth, start_time, updated_time organ from languages where  language ="'+ language+'";'
-		print sql
+		# print sql
 		cur.execute(sql)
 		temp_rows = cur.fetchall();
 		conn.close()
@@ -165,7 +165,7 @@ def call_server():
 			temp_dict['stats']['end_time'] = temp_rows[i][7]
 			temp_dict['stats']['project_id'] = temp_rows[i][0]
 			final_rows.append(temp_dict)
-		print final_rows
+		# print final_rows
 		return make_response(jsonify({'data':final_rows}),200) 
 	else:
 		return make_response(jsonify({'error': 'Bad Request'}), 400)

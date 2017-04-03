@@ -62,7 +62,7 @@ var svg = d3.select(".bubbleChart").append("svg")
   node.append("circle")
       .attr("r", function(d) { return d.r; })
       .on("click", function(d) {
-        alert("on click" );
+        dashboardcallapi(d.name);
     });
 
   node.append("text")

@@ -1,8 +1,5 @@
 <html lang="en">
-
 <head>
-
-
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport"
@@ -13,8 +10,6 @@
 	<!-- Bootstrap Core CSS -->
 	<!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-
-
 	<!-- Custom CSS -->
 	<!-- <link href="css/simple-sidebar.css" rel="stylesheet"> -->
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/simple-sidebar.css') }}">
@@ -22,8 +17,6 @@
 
 	<!-- jQuery -->
 	<script type = "text/javascript" src = "{{ url_for('static', filename = 'js/jquery.js') }}" >
-		
-
 	</script>
 
 	<!-- Bootstrap Core JavaScript -->
@@ -146,14 +139,14 @@ margin: 10px;
 
 			</ul>
 			<div class="tab-content">
-				<div id="firsttab" class="tab-pane fade ">
+				<div id="firsttab" class="tab-pane fade in active">
 					<div class="clusterdendrogram">
 					</div>
 				</div>
 				
 
 				<br/><br/>
-				<div id="secondtab" class="tab-pane fade in active">
+				<div id="secondtab" class="tab-pane fade">
 							<div class = "row">
 							<div class = "col-sm-5" class = "col-lg-5" class = "col-md-5">
 							<label for="company1">Company 1</label>
