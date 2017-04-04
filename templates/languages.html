@@ -36,10 +36,16 @@
 	<script type = "text/javascript" src = "{{ url_for('static', filename = 'js/d3.v3.min.js') }}" > </script>
 
 	<script type = "text/javascript" src = "{{ url_for('static', filename = 'js/languages.js') }}" ></script>
+	
 	<script type = "text/javascript" src = "{{ url_for('static', filename = 'js/dashboard.js') }}" ></script>
+	<!-- <script type = "text/javascript" src = "{{ url_for('static', filename = 'js/d3.js') }}" ></script> -->
+  
   
 
 <style>
+
+/**************************************************************Bubbel chart css************************************************************/
+
     text {
   font: 24px "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-anchor: middle;
@@ -58,11 +64,75 @@ circle {
   padding-top : 15px;
 
 }*/
-/*
+/*  
+
 svg{
   padding-top : 5px;
   padding-bottom : 55px;
 }*/
+/****************************************************************Dashboard CSS**********************************************************/
+
+/*body{
+    width:1060px;
+    margin:50px auto;
+	background-color:#ffff99;
+}
+*/
+path {  stroke: #fff; }
+path:hover {  opacity:0.9; }
+rect:hover {  fill:blue; }
+.axis {  font: 10px sans-serif; }
+.legend tr{    border-bottom:1px solid grey; }
+.legend tr:first-child{    border-top:1px solid grey; }
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {  display: none; }
+.legend{
+    width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  overflow: hidden;
+  border-left: 1px solid black;
+}
+table{
+border: 1px solid black;
+}
+.legend td{
+    border: 1px solid black;
+    /*padding: 5px;*/
+}
+  .legend td{
+    border: 1px solid black;
+    
+  }
+  
+ /*.legend th{*/
+    /*background-color: #ffff99;*/
+	 border: 1px solid black;
+  }
+  
+
+
+.legendFreq, .legendPerc{
+    width:30px;
+}
+.container {
+  float: left;
+}
+
+/*#area1{margin-left:600px;}
+ 
+#area0{border:1px solid black;} */
+
+/**************************************************************************************************************************/
+
+
 </style>
 
 </head>
@@ -90,7 +160,7 @@ svg{
 			<ul class="nav nav-tabs nav-justified" role="tablist">
 
 				<li><a data-toggle="tab" href="#firsttab">Trending Programming Languages</a></li>
-				<li><a data-toggle="tab" href="#secondtab">Simple Dashboard</a></li>
+				<li><a data-toggle="tab" href="#secondtab">Dashboard</a></li>
 
 			</ul>
 			<div class="tab-content">
@@ -101,7 +171,12 @@ svg{
 
 				<div id="secondtab" class="tab-pane fade ">
 					
-					<h3>Canvas for simple dashboard chart will come here</h3>
+					<h3>This heading needs modification</h3>
+
+						<div class = "container" id='area0'></div>
+						<div class= "container" id="area1"></div>
+						<div id="area2"></div>
+
 				</div>
 			</div>		
 		</div>

@@ -5,7 +5,7 @@ var json = {
 }
 
 function callapi(){
-          console.log("Callapi function called");
+          // console.log("Callapi function called");
           postdata={
             title:"languages"
           }
