@@ -109,13 +109,13 @@ function dashboard()
     function histoGram(fD){
 
 
-      hG={},    hGDim = {t: 50, r: 350, b: 0, l: 80};
-      hGDim.w = screen.availWidth-200 - hGDim.l - hGDim.r, 
+      hG={},    hGDim = {t: 20, r: 350, b: 0, l: 80};
+      hGDim.w = screen.availWidth-300 - hGDim.l - hGDim.r, 
       hGDim.h = screen.availHeight-300 - hGDim.t - hGDim.b;
 
         //create svg for histogram.
         var hGsvg = d3.select('#area2').append("svg")
-        .attr("width", hGDim.w + hGDim.l + hGDim.r)
+        .attr("width", hGDim.w + hGDim.l)
         .attr("height", hGDim.h + hGDim.t + hGDim.b + 160).append("g")
 
         .attr("transform", "translate(" + hGDim.l + "," + hGDim.t + ")");
@@ -152,10 +152,12 @@ function dashboard()
 
         hGsvg.append("g")
         .attr("class", "y axis")
-        .attr("transform", "translate("+10+",0)")
-        .call(yAxis)
-        .selectAll("text")
-        .attr("font-size","12px");
+        .attr("transform", "translate("+7+",0)")
+        .call(yAxis);
+
+	hGsvg.select(".y.axis")
+		.selectAll("text")
+        .style("font-size","1px");	
 
         // Create bars for histogram to contain rectangles and freq labels.
         var bars = hGsvg.selectAll(".bar").data(fD).enter()
@@ -163,7 +165,7 @@ function dashboard()
         
         //create the rectangles.
         bars.append("rect")
-        .attr("x", function(d) { return x(d[0]); })
+        .attr("x", function(d) { return (x(d[0])); })
         .attr("y", function(d) { return y(d[1]); })
         .attr("width", x.rangeBand())
         .attr("height", function(d) { return hGDim.h - y(d[1]); })

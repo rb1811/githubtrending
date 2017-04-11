@@ -87,7 +87,6 @@ svg{
 path {  stroke: #fff; }
 path:hover {  opacity:0.9; }
 rect:hover {  fill:blue; }
-.axis {  font: 95% sans-serif; }
 .legend tr{    border-bottom:10% solid grey; }
 .legend tr:first-child{    border-top:10% solid grey; }
 
@@ -97,7 +96,7 @@ rect:hover {  fill:blue; }
 	stroke: #000;
 	shape-rendering: crispEdges;
 }
-
+.y.axis text{ font-size: 100%;}
 .x.axis path {  display: none; }
 .legend{
 	border-collapse: collapse;
@@ -121,7 +120,7 @@ table{
 	border: 1px solid black;
 }
 
-*/
+
 .container {
 	float: left;
 }
@@ -135,7 +134,10 @@ margin-bottom:  25px;
 
 }
 
-
+.dashboardchart
+{
+	float: left;
+}
 
 /*#area1{margin-left:50%;}*/
 
@@ -200,22 +202,24 @@ margin-bottom:  25px;
 
 
 					<div id = "dashboardchart">
-					<div class = "row">
 					
-					<div class = "col-sm-12" class = "col-lg-12" class = "col-md-12">
-						<div id="area2"></div>
+					<div class = "row">
+					<div class = "col-sm-7" class = "col-lg-10" class = "col-md-10">
+						<div id="area2" style="width:500px;"></div>
 					</div>
 	
-					</div>
-
-					<div class = "row">
 					
-					<div class = "col-sm-4" class = "col-lg-4" class = "col-md-4" >
+
+					
+					<div class = "col-sm-2" class = "col-lg-2" class = "col-md-2" >
 						<div class= "container" id="area1"></div>
 					</div>
+					</div>
+
+
 					
 						
-					</div>
+					
 
 
 
