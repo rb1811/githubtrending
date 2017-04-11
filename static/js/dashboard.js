@@ -3,10 +3,11 @@ button_id ="1";
 
 function dashboardcallapi(current_lang){
 
-  $("#firsttab").attr("class", "tab-pane fade");
-  $("#secondtab").attr("class", "tab-pane fade in active");
+  // $("#firsttab").attr("class", "tab-pane fade");
+  // $("#secondtab").attr("class", "tab-pane fade in active");
 
-// $("#secondtab").trigger('click');  
+// $("#secondtab").trigger('click');
+ $('.nav-tabs a[href="#secondtab"]').tab('show');  
 
   document.getElementById('dashboardchart_currlang').innerHTML= "Projects in "+current_lang ; 
   console.log("dashboard Callapi function called");
