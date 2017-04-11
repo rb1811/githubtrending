@@ -12,7 +12,9 @@ function callapi()
              url: 'http://127.0.0.1:5000/server',
              type: 'POST',
              data: dataString,
-             success: function(data) {  makeGraph(data);},
+             success: function(data) { 
+              console.log(data);
+              makeGraph(data);},
              contentType: "application/json",
              dataType: 'json'
           });
@@ -43,6 +45,8 @@ var svg = d3.select(".clusterdendrogram").append("svg")
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
 
 
   root = json_obj;
@@ -80,8 +84,37 @@ function update(source) {
   var nodeEnter = node.enter().append("g")
       .attr("class", "node")
       .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
-      .on("click", click)
-      .on("mouseover",function(d){if (d.forks) {alert("asdasd")}});
+      .on("click", clicky)
+      .on("mouseenter",function(d){if (d.forks) {
+
+        document.getElementById("alert_name").innerHTML = d.name;
+        document.getElementById("alert_forks").innerHTML = d.forks;
+        document.getElementById("alert_stars").innerHTML = d.stars;
+        document.getElementById("alert_auth").innerHTML = d.contributing_auth;
+        document.getElementById("alert_start").innerHTML = d.start_time;
+        document.getElementById("alert_update").innerHTML = d.updated_time;
+
+      
+
+      }})
+       // .on("mouseleave",function(d){if (d.forks) {
+
+       //  document.getElementById("alert_name").innerHTML = "";
+       //  document.getElementById("alert_forks").innerHTML = "";
+       //  document.getElementById("alert_stars").innerHTML = "";
+       //  document.getElementById("alert_auth").innerHTML = "";
+       //  document.getElementById("alert_start").innerHTML = "";
+       //  document.getElementById("alert_update").innerHTML = "";
+
+      
+
+      // }});
+
+
+      
+
+      
+
 
       
   nodeEnter.append("circle")
@@ -154,8 +187,8 @@ function update(source) {
   });
 }
 
-// Toggle children on click.
-function click(d) {
+// Toggle children on clicky.
+function clicky(d) {
   if (d.children) {
     d._children = d.children;
     d.children = null;

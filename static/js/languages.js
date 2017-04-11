@@ -1,7 +1,7 @@
 var json = {
-     "name": "languages",
-     "children": [
-     ]
+ "name": "languages",
+ "children": [
+ ]
 }
 
 function callapi(){
@@ -13,62 +13,62 @@ function callapi(){
           // console.log(dataString);
 
           $.ajax({
-            
-             url: 'http://127.0.0.1:5000/server',
-             type: 'POST',
-             data: dataString,
-             success: function(data) {  makeGraph(data);},
-             contentType: "application/json",
-             dataType: 'json'
-          });
 
-  }
+           url: 'http://127.0.0.1:5000/server',
+           type: 'POST',
+           data: dataString,
+           success: function(data) {  makeGraph(data);},
+           contentType: "application/json",
+           dataType: 'json'
+         });
 
-function makeGraph(data){
+        }
+
+        function makeGraph(data){
  // console.log(data);
 
-for (i =0;i<data['data'].length;i++){
+ for (i =0;i<data['data'].length;i++){
   json['children'].push({"name": data['data'][i][0],"size":data['data'][i][1].toString()})
 }
  // console.log(json['children'].length);
 
 
-var bleed = 100,
-    width = 960,
-    height = 960;
+ var bleed = 100,
+ width = 960,
+ height = 960;
 
-var pack = d3.layout.pack()
-    .sort(null)
-    .size([width, height + bleed * 2])
-    .padding(2);
+ var pack = d3.layout.pack()
+ .sort(null)
+ .size([width, height + bleed * 2])
+ .padding(2);
 
-var svg = d3.select(".bubbleChart").append("svg")
-    .attr("width", width)
-    .attr("height", height)
-  .append("g")
-    .attr("transform", "translate(0," + -bleed + ")");
+ var svg = d3.select(".bubbleChart").append("svg")
+ .attr("width", width)
+ .attr("height", height)
+ .append("g")
+ .attr("transform", "translate(0," + -bleed + ")");
 
 
-  var node = svg.selectAll(".node")
-      .data(pack.nodes(flatten(json))
-        .filter(function(d) { return !d.children; }))
-    .enter().append("g")
-      .attr("class", "node")
-      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+ var node = svg.selectAll(".node")
+ .data(pack.nodes(flatten(json))
+  .filter(function(d) { return !d.children; }))
+ .enter().append("g")
+ .attr("class", "node")
+ .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 
-  node.append("title")
-      .text(function(d) { return d.name+ ": " +d.value });
+ node.append("title")
+ .text(function(d) { return d.name+ ": " +d.value });
 
-  node.append("circle")
-      .attr("r", function(d) { return d.r; })
-      .on("click", function(d) {
-        dashboardcallapi(d.name);
-    });
+ node.append("circle")
+ .attr("r", function(d) { return d.r; })
+ .on("click", function(d) {
+  dashboardcallapi(d.name);
+});
 
-  node.append("text")
-      .text(function(d) { return d.name; })
-      .style("font-size", function(d) { return Math.min(2 * d.r, (2 * d.r - 8) / this.getComputedTextLength() * 24) + "px"; })
-      .attr("dy", ".35em");
+ node.append("text")
+ .text(function(d) { return d.name; })
+ .style("font-size", function(d) { return Math.min(2 * d.r, (2 * d.r - 8) / this.getComputedTextLength() * 24) + "px"; })
+ .attr("dy", ".35em");
 
 
 // Returns a flattened hierarchy containing all leaf nodes under the root.
@@ -87,6 +87,42 @@ function flatten(root) {
 
 // Ruk call kar raa
 $(document).ready(function () {
-  
+
   callapi();
 });
+
+
+
+$(window).ready(function() {
+
+  $('#forks').closest('label').click(function() { 
+    click_row('1'); 
+  });
+
+});
+
+$(window).ready(function() {
+
+  $('#stargazers').closest('label').click(function() { 
+    click_row('2');
+  });
+
+
+});
+
+$(window).ready(function() {
+
+  $('#contrib_auth').closest('label').click(function() { 
+    click_row('3') ;
+  });
+
+});
+
+$(window).ready(function() {
+
+  $('#duration').closest('label').click(function() { 
+    click_row('4');
+  });
+
+});
+

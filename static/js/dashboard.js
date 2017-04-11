@@ -5,6 +5,9 @@ function dashboardcallapi(current_lang){
 
   $("#firsttab").attr("class", "tab-pane fade");
   $("#secondtab").attr("class", "tab-pane fade in active");
+
+// $("#secondtab").trigger('click');  
+
   document.getElementById('dashboardchart_currlang').innerHTML= "Projects in "+current_lang ; 
   console.log("dashboard Callapi function called");
   postdata={
@@ -42,7 +45,7 @@ function click_row(button_id){
       temp_key  =  Object.values(v);
       return [temp_key[0],v.stats["stars"]];}),"#e08214");
   else if(button_id=="4"){
-    console.log(button_id,"asfsf");
+
     hG.update(fData.map(function(v){ 
       temp_key  =  Object.values(v);
 

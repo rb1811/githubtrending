@@ -135,6 +135,8 @@ margin-bottom:  25px;
 
 }
 
+
+
 /*#area1{margin-left:50%;}*/
 
 /*#area0{border:1px solid black;}*/
@@ -182,33 +184,19 @@ margin-bottom:  25px;
 					
 					<h3 id="dashboardchart_currlang"></h3>
 
-					<div class = "row">
-
-
-						<div class = "col-sm-3" class = "col-lg-3" class = "col-md-3" onclick="click_row('1')">
-							<br/> 	
-							<button type="button" class="btn btn-primary btn-block">Forks</button>
+ 						<div class="btn-group" data-toggle="buttons">
+						  <label class="btn btn-primary active">
+						    <input type="radio" id="forks" autocomplete="off" checked > Forks  </label>
+						  <label class="btn btn-primary">
+						    <input type="radio"  id="stargazers" autocomplete="off" > Stargazers	  </label>
+						  <label class="btn btn-primary">
+						    <input type="radio"  id="contrib_auth" autocomplete="off" > Contributing Authors </label>
+						    <label class="btn btn-primary">
+						    <input type="radio"  id="duration" autocomplete="off" > Duration </label>
 						</div>
 
 
-						<div class = "col-sm-3" class = "col-lg-3" class = "col-md-3" onclick="click_row('2')">
-							<br/> 	
-							<button type="button" class="btn btn-primary btn-block">Stargazers</button>
-						</div>
-
-
-
-						<div class = "col-sm-3" class = "col-lg-3" class = "col-md-3" onclick="click_row('3')">
-							<br/> 	
-							<button type="button" class="btn btn-primary btn-block">Contributing Authors</button>
-						</div>
-
-
-						<div class = "col-sm-3" class = "col-lg-3" class = "col-md-3" onclick="click_row('4')">
-							<br/> 	
-							<button type="button" class="btn btn-primary btn-block">Duration</button>
-						</div>
-					</div>
+						
 
 
 					<div id = "dashboardchart">

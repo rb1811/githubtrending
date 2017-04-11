@@ -14,7 +14,7 @@
 	<!-- <link href="css/simple-sidebar.css" rel="stylesheet"> -->
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/simple-sidebar.css') }}">
 
-
+	
 	<!-- jQuery -->
 	<script type = "text/javascript" src = "{{ url_for('static', filename = 'js/jquery.js') }}" ></script>
 
@@ -27,6 +27,7 @@
 
 	<script type = "text/javascript" src = "{{ url_for('static', filename = 'js/comp_compare.js') }}"></script>
 
+	
 
 <style type="text/css">
 /*****************************************Cluster Dendrogram**********************************************/
@@ -50,6 +51,11 @@
   stroke: #ccc;
   stroke-width: 1.5px;
 }	
+
+
+
+
+
 
 
 /******************************************Ring char css*********************************************/
@@ -129,16 +135,49 @@ margin: 10px;
 			</ul>
 			<div class="tab-content">
 				<div id="firsttab" class="tab-pane fade in active">
-					<div class="clusterdendrogram">
-					</div>
+				<div class="alert alert-info">
+				    <div class="row">
+
+				    <div class="col-sm-2  col-md-2 col-lg-2">
+				    <strong>Name: </strong><h7 id="alert_name"></h7>
+				    </div>
+
+				    <div class="col-sm-2  col-md-2 col-lg-2">
+				     <strong>Forks: </strong><h7 id="alert_forks"></h7>
+				    </div>
+
+				    <div class="col-sm-2  col-md-2 col-lg-2">
+				     <strong>Stars: </strong><h7 id="alert_stars"></h7>
+				    </div>
+
+				    <div class="col-sm-2  col-md-2 col-lg-2">
+				      <strong>Authors: </strong><h7 id="alert_auth"></h7>
+				    </div>
+
+				    <div class="col-sm-2  col-md-2 col-lg-2">
+				       <strong>Start: </strong><h7 id="alert_start"></h7>
+				    </div>
+
+				    <div class="col-sm-2  col-md-2 col-lg-2">
+				        <strong>Update: </strong><h7 id="alert_update"></h7>
+				    </div>
+
+				        </div> 
+				  </div>
+  
+					<div class="clusterdendrogram"></div>
 				</div>
 				
+				
 
-				<br/><br/>
+				<div class="alert alert-danger" id ="alert_message">
+
+			  			<strong>Pick different Companies</strong>
+  				</div>
 				<div id="secondtab" class="tab-pane fade">
 							<div class = "row">
 							<div class = "col-sm-5" class = "col-lg-5" class = "col-md-5">
-							<label for="company1">Company 1</label>
+							<label for="company1">Organisation 1</label>
       							<select class="form-control" id="list1" >
 						      </select>
 				      </div>
@@ -149,7 +188,7 @@ margin: 10px;
 				      </div>
 
 				      <div class = "col-sm-5" class = "col-lg-5" class = "col-md-5">
-							<label for="company2">Company 2</label>
+							<label for="company2">Organisation 2</label>
       							<select class="form-control" id="list2" >
 						      </select>
 				      </div>

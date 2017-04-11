@@ -269,12 +269,12 @@ function getdetials()
   
   if (document.getElementById('list1').value == document.getElementById('list2').value)
   {
-    alert("Please pick 2 different companies");
+    document.getElementById("alert_message").innerHTML= "Please pick 2 different companies";
     return;
   }
   else
   {
-  
+   $("#alert_message").alert("close");
     postdata={
             title:"twocompanies",
             company1 : document.getElementById('list1').value,
