@@ -87,7 +87,7 @@ function update(source) {
       .on("click", clicky)
       .on("mouseenter",function(d){if (d.forks) {
 
-        document.getElementById("alert_name").innerHTML = d.name;
+    
         document.getElementById("alert_forks").innerHTML = d.forks;
         document.getElementById("alert_stars").innerHTML = d.stars;
         document.getElementById("alert_auth").innerHTML = d.contributing_auth;
