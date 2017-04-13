@@ -1,8 +1,81 @@
+pircolors=["#2484c1","#0c6197","#4daa4b","#90c469","#daca61","#e4a14b","#e98125","#cb2121","#830909","#923e99","#ae83d5","#bf273e","#ce2aeb","#bca44a","#618d1b","#1ee67b","#b0ec44","#a4a0c9","#322849","#86f71a","#d1c87f","#7d9058","#44b9b0","#7c37c0","#cc9fb1","#e65414","#8b6834","#248838"]
+
+piedata= {
+  "header": {
+    "title": {
+      "text": "Programming Languages of ",
+      "fontSize": 24,
+      "font": "open sans"
+    },
+    "subtitle": {
+      "text": "",
+      "color": "#999999",
+      "fontSize": 12,
+      "font": "open sans"
+    },
+    "titleSubtitlePadding": 9
+  },
+  "footer": {
+    "color": "#999999",
+    "fontSize": 10,
+    "font": "open sans",
+    "location": "bottom-left"
+  },
+  "size": {
+    "canvasWidth": 590,
+    "pieOuterRadius": "90%"
+  },
+  "data": {
+    "sortOrder": "value-desc",
+    "content": []
+  },
+  "labels": {
+    "outer": {
+      "pieDistance": 32
+    },
+    "inner": {
+      "hideWhenLessThanPercentage": 3
+    },
+    "mainLabel": {
+      "fontSize": 11
+    },
+    "percentage": {
+      "color": "#ffffff",
+      "decimalPlaces": 0
+    },
+    "value": {
+      "color": "#adadad",
+      "fontSize": 11
+    },
+    "lines": {
+      "enabled": true
+    },
+    "truncation": {
+      "enabled": true
+    }
+  },
+  "effects": {
+    "pullOutSegmentOnClick": {
+      "effect": "linear",
+      "speed": 400,
+      "size": 8
+    }
+  },
+  "misc": {
+    "gradient": {
+      "enabled": true,
+      "percentage": 100
+    }
+  }
+}
+
+
+
+
     function doublebarchart(data) {
+      $("#comp_barchart").show();
     key_array=Object.keys(data[0])
-      // console.log(key_array);
-      // console.log(data);
-      // // key_array=Object.keys(data[0])
+     
         var labelArea = 150;
     var chart,
             width = 450,
@@ -11,17 +84,7 @@
     var rightOffset = width + labelArea;
     var lCol = document.getElementById('list1').value
     var rCol  = document.getElementById('list2').value
-    // for ( i = 0; i < key_array.length;i++){
-    //   if (key_array[i] != 'languages' && !lCol)
-    //   {
-    //     lCol = key_array[i].toString();
-    //   }
-    //   else{
-    //     rCol = key_array[i].toString();
-    //   }
-    // }
-
-     // console.log(lCol,rCol);
+   
 
         var chart = d3.select(".twosided")
                 // .append('svg')
@@ -132,136 +195,64 @@
                 .attr('class', 'score')
                 .text(function(d){return d[rCol];});    
        
-        chart.append("text").attr("x",width/3).attr("y", 10).attr("class","title").text(lCol);
-        chart.append("text").attr("x",width/3+rightOffset).attr("y", 10).attr("class","title").text(rCol);
-        chart.append("text").attr("x",width+labelArea/3).attr("y", 10).attr("class","title").text("languages");
+        chart.append("text").attr("x",width/3).attr("y", 10).attr("class","title").text("");
+        chart.append("text").attr("x",width/3+rightOffset).attr("y", 10).attr("class","title").text("");
+        chart.append("text").attr("x",width+labelArea/3).attr("y", 10).attr("class","title").text("All Languages");
 
-        ringchart1(data);
-        ringchart2(data);
+        pie1(data);
+        pie2(data);
+
 
     }
 
 
-
-function ringchart1(data){
-  // console.log(data);
-  var dataset =[]
-  for (i=0;i<data.length;i++)
+function pie1(data)
+{
+  document.getElementById('pie1').innerHTML = "";
+  piedata['header']['title']['text'] = piedata['header']['title']['text'] + document.getElementById('list1').value
+fdata  = piedata;
+for (i=0;i<data.length;i++)
   {
-    if( data[i][document.getElementById('list1').value] )
-    dataset.push(data[i][document.getElementById('list1').value])
-  }
+    temp_dict = {}
 
-var w = 300;
-      var h = 300;
-      // console.log('dataset1',dataset);
-      // var dataset = [ 5, 10, 20, 45, 6, 25 ];
+    if (data[i][document.getElementById('list1').value])
+    {
+      temp_dict['label'] = data[i]['languages'];
+      temp_dict['value'] = data[i][document.getElementById('list1').value];
+      temp_dict ['color'] = pircolors[i] ;
+      fdata['data']['content'].push(temp_dict);
+    }   
+}
 
-      var outerRadius = w / 2;
-      var innerRadius = w / 3;
-      var arc = d3.svg.arc()
-              .innerRadius(innerRadius)
-              .outerRadius(outerRadius);
-      
-      var pie = d3.layout.pie();
-      
-      //Easy colors accessible via a 10-step ordinal scale
-      var color = d3.scale.category20();
+var pie = new d3pie("pie1", fdata);
 
-      //Create SVG element
-      var svg = d3.select(".ringcompany1")
-            // .append("svg")
-            .attr("width", w)
-            .attr("height", h);
-      
-      //Set up groups
-      var arcs = svg.selectAll("g.arc")
-              .data(pie(dataset))
-              .enter()
-              .append("g")
-              .attr("class", "arc")
-              .attr("transform", "translate(" + outerRadius + "," + outerRadius + ")");
-      
-      //Draw arc paths
-      arcs.append("path")
-          .attr("fill", function(d, i) {
-            return color(i);
-          })
-          .attr("d", arc);
-      
-      //Labels
-      arcs.append("text")
-          .attr("transform", function(d) {
-            return "translate(" + arc.centroid(d) + ")";
-          })
-          .attr("text-anchor", "middle")
-          .text(function(d) {
-            return d.value.toString() ;
-          });
-      
-
-
+piedata['data']['content']=[];
 }
 
 
-function ringchart2(data){
-  // console.log(data);
-  var dataset =[]
-  for (i=0;i<data.length;i++)
-  {if( data[i][document.getElementById('list2').value] )
-    dataset.push(data[i][document.getElementById('list2').value])
-  }
-  // console.log('dataset2',dataset);
-var w = 300;
-      var h = 300;
-
-      // var dataset = [ 15, 10, 20, 45, 6, 2 ];
-
-      var outerRadius = w / 2;
-      var innerRadius = w / 3;
-      var arc = d3.svg.arc()
-              .innerRadius(innerRadius)
-              .outerRadius(outerRadius);
-      
-      var pie = d3.layout.pie();
-      
-      //Easy colors accessible via a 10-step ordinal scale
-      var color = d3.scale.category10();
-
-      //Create SVG element
-      var svg = d3.select(".ringcompany2")
-            // .append("svg")
-            .attr("width", w)
-            .attr("height", h);
-      
-      //Set up groups
-      var arcs = svg.selectAll("g.arc")
-              .data(pie(dataset))
-              .enter()
-              .append("g")
-              .attr("class", "arc")
-              .attr("transform", "translate(" + outerRadius + "," + outerRadius + ")");
-      
-      //Draw arc paths
-      arcs.append("path")
-          .attr("fill", function(d, i) {
-            return color(i);
-          })
-          .attr("d", arc);
-      
-      //Labels
-      arcs.append("text")
-          .attr("transform", function(d) {
-            return "translate(" + arc.centroid(d) + ")";
-          })
-          .attr("text-anchor", "middle")
-          .text(function(d) {
-            return d.value.toString() ;
-          });
-      
-
-
+function pie2(data)
+{document.getElementById('pie2').innerHTML = "";
+  piedata['header']['title']['text'] = "Programming languages of "
+  piedata['header']['title']['text'] = piedata['header']['title']['text'] + document.getElementById('list2').value
+fdata  = piedata;
+for (i=0;i<data.length;i++)
+  {
+    temp_dict = {}
+    if (data[i][document.getElementById('list2').value])
+    {
+      temp_dict['label'] = data[i]['languages'];
+      temp_dict['value'] = data[i][document.getElementById('list2').value];
+      temp_dict ['color'] = pircolors[i] ;
+      fdata['data']['content'].push(temp_dict);
+    }   
 }
+
+var pie = new d3pie("pie2", fdata);
+piedata['data']['content']=[];
+}
+
+
+
 
 
 function getdetials()
@@ -269,12 +260,13 @@ function getdetials()
   
   if (document.getElementById('list1').value == document.getElementById('list2').value)
   {
+    $("#alert_message").show();
     document.getElementById("alert_message").innerHTML= "Please pick 2 different companies";
     return;
   }
   else
   {
-   $("#alert_message").alert("close");
+   $("#alert_message").hide();
     postdata={
             title:"twocompanies",
             company1 : document.getElementById('list1').value,
@@ -301,11 +293,9 @@ function getdetials()
 
 
 
-// $(document).ready(function () {
+$(document).ready(function () {
     
-//     doublebarchart(datay);
-//     ringchart1();
-//     ringchart2();
-// });
+$("#comp_barchart").hide();
+});
 
    

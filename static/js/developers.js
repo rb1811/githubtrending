@@ -13,7 +13,7 @@ function callapi()
              type: 'POST',
              data: dataString,
              success: function(data) { 
-              console.log(data);
+              // console.log(data);
               makeGraph(data);},
              contentType: "application/json",
              dataType: 'json'
