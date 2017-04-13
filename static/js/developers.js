@@ -293,7 +293,4 @@ function update(source) {
   }
 }
 
-
-
-
 }

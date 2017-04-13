@@ -281,10 +281,10 @@ function getdetials()
              type: 'POST',
              data: dataString,
              success: function(data) { 
-              d3.selectAll("svg > *").remove();
+              // d3.selectAll("svg > *").remove();
               pie1(data['data']);
               pie2(data['data']);
-},
+            },
               // doublebarchart(data['data']);},
              contentType: "application/json",
              dataType: 'json'
