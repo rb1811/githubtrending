@@ -1,19 +1,5 @@
 var treeData 
 
- // {
- //    "name": "Top Level",
- //    "children": [
- //      { 
- //        "name": "Level 2: A",
- //        "children": [
- //          { "name": "Son of A" },
- //          { "name": "Daughter of A" }
- //        ]
- //      },
- //      { "name": "Level 2: B" }
- //    ]
- //  };
-
 
 function callapi()
 {
@@ -29,11 +15,8 @@ function callapi()
              type: 'POST',
              data: dataString,
              success: function(data) {
-             // console.log('data received'); 
-              // console.log(data);
               json_obj = data['data'].replace(/\'/g, '"');
                treeData = JSON.parse(json_obj);
-                // treeData =  data['data'];
                 makegraph();
               },
              contentType: "application/json",
@@ -102,12 +85,6 @@ for(var i = 0; i < companies.length; i++) {
 function firstfunction(){
   // console.log("called");
   callapi();
-
-
-
-
-
-
 
 
   getcompanylist();
@@ -185,7 +162,18 @@ function update(source) {
       .attr("transform", function(d) {
         return "translate(" + source.y0 + "," + source.x0 + ")";
     })
-    .on('click', click);
+    .on('click', click)
+    .on("mouseenter",function(d){  if(Object.keys(d).length == 9){  
+
+        document.getElementById("alert_forks").innerHTML = d.data.forks;
+        document.getElementById("alert_stars").innerHTML = d.data.stars;
+        document.getElementById("alert_auth").innerHTML = d.data.contributing_auth;
+        document.getElementById("alert_start").innerHTML = d.data.start_time;
+        document.getElementById("alert_update").innerHTML = d.data.updated_time;
+      
+
+  
+    }});
 
   // Add Circle for the nodes
   nodeEnter.append('circle')
@@ -298,6 +286,9 @@ function update(source) {
         d.children = d._children;
         d._children = null;
       }
+
+      // console.log(d.children);
+
     update(d);
   }
 }
