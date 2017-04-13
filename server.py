@@ -67,7 +67,7 @@ def call_server():
 					temp_dict2["children"].append(rows[comp_key][lang_key][i])
 				temp_dict["children"].append(temp_dict2)
 			final_rows["children"].append(temp_dict)
-
+		# print final_rows
 
 		return make_response(jsonify({'data':str(final_rows)}),200)  
 
