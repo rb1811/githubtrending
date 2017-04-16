@@ -159,6 +159,15 @@ function dashboard()
 	hGsvg.select(".y.axis")
 		.selectAll("text")
         .style("font-size","1px");	
+hGsvg.append("text")
+    .attr("font","arial")
+    .attr("font-size","8px")
+    .attr("text-anchor", "end")
+    .attr("x","-20%")
+    .attr("y", "-15%")
+    .attr("dy", ".75em")
+    .attr("transform", "rotate(-90)")
+    .text("Count -->");
 
         // Create bars for histogram to contain rectangles and freq labels.
         var bars = hGsvg.selectAll(".bar").data(fD).enter()
@@ -166,7 +175,7 @@ function dashboard()
         
         //create the rectangles.
         bars.append("rect")
-        .attr("x", function(d) { return (x(d[0])); })
+        .attr("x", function(d) { return (x(d[0])+2.5); })
         .attr("y", function(d) { return y(d[1]); })
         .attr("width", x.rangeBand())
         .attr("height", function(d) { return hGDim.h - y(d[1]); })

@@ -41,7 +41,7 @@ var defaultSettings = {
 		title: {
 			text:     "",
 			color:    "#333333",
-			fontSize: 18,
+			fontSize: 15,
 			font:     "arial"
 		},
 		subtitle: {
@@ -50,7 +50,7 @@ var defaultSettings = {
 			fontSize: 14,
 			font:     "arial"
 		},
-		location: "top-center",
+		location: "top-left",
 		titleSubtitlePadding: 8
 	},
 	footer: {
@@ -132,22 +132,7 @@ var defaultSettings = {
 		highlightSegmentOnMouseover: true,
 		highlightLuminosity: -0.2
 	},
-	tooltips: {
-		enabled: false,
-		type: "placeholder", // caption|placeholder
-    string: "",
-    placeholderParser: null,
-		styles: {
-      fadeInSpeed: 250,
-			backgroundColor: "#000000",
-      backgroundOpacity: 0.5,
-			color: "#efefef",
-      borderRadius: 2,
-      font: "arial",
-      fontSize: 10,
-      padding: 4
-		}
-	},
+	
 	misc: {
 		colors: {
 			background: null,

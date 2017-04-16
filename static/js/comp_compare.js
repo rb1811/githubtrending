@@ -3,7 +3,7 @@ pircolors=["#2484c1","#0c6197","#4daa4b","#90c469","#daca61","#e4a14b","#e98125"
 piedata= {
   "header": {
     "title": {
-      "text": "Programming Languages of ",
+      "text": "",
       "fontSize": 24,
       "font": "open sans"
     },
@@ -61,9 +61,22 @@ piedata= {
       "size": 8
     }
   },
+
+"tooltips": {
+					"enabled": true,
+					"type": "placeholder",
+					"string": "{label}: {value}, {percentage}%",
+					"styles": {
+						"backgroundColor": "#0b0a0a",
+						"backgroundOpacity": 0.62,
+						"color": "#cfe5d0",
+						"font-size":"10px",
+					}
+				},
+
   "misc": {
     "gradient": {
-      "enabled": true,
+      "enabled": false,
       "percentage": 100
     }
   }
@@ -208,17 +221,28 @@ piedata= {
 
 function pie1(data)
 {
+var d1=data;
+			var list0=(document.getElementById('list1').value);
+			//console.log(list1);
+			console.log(d1);
+			d1.sort(function(a, b) {
+			   
+			    return d3.descending(parseFloat(a[list0]) , parseFloat(b[list0]));
+			});
+			
+
   document.getElementById('pie1').innerHTML = "";
+ piedata['header']['title']['text'] = "";
   piedata['header']['title']['text'] = piedata['header']['title']['text'] + document.getElementById('list1').value
 fdata  = piedata;
-for (i=0;i<data.length;i++)
+for (i=0;i<15 && i <d1.length;i++)
   {
     temp_dict = {}
 
-    if (data[i][document.getElementById('list1').value])
+    if (d1[i][document.getElementById('list1').value])
     {
-      temp_dict['label'] = data[i]['languages'];
-      temp_dict['value'] = data[i][document.getElementById('list1').value];
+      temp_dict['label'] = d1[i]['languages'];
+      temp_dict['value'] = d1[i][document.getElementById('list1').value];
       temp_dict ['color'] = pircolors[i] ;
       fdata['data']['content'].push(temp_dict);
     }   
@@ -231,22 +255,33 @@ piedata['data']['content']=[];
 
 
 function pie2(data)
-{document.getElementById('pie2').innerHTML = "";
-  piedata['header']['title']['text'] = "Programming languages of "
-  piedata['header']['title']['text'] = piedata['header']['title']['text'] + document.getElementById('list2').value
-fdata  = piedata;
-for (i=0;i<data.length;i++)
+{
+var d2=data
+var list0=(document.getElementById('list2').value);
+console.log(d2);
+d2.sort(function(a, b) {
+   
+    return d3.descending(parseFloat(a[list0]), parseFloat(b[list0]));
+});
+
+
+document.getElementById('pie2').innerHTML = "";
+  piedata['header']['title']['text'] = "";
+  piedata['header']['title']['text'] = piedata['header']['title']['text'] + document.getElementById('list2').value;
+ fdata  = piedata;
+for (i=0;i<15 && i <d2.length;i++)
   {
     temp_dict = {}
-    if (data[i][document.getElementById('list2').value])
+    if (d2[i][document.getElementById('list2').value])
     {
-      temp_dict['label'] = data[i]['languages'];
-      temp_dict['value'] = data[i][document.getElementById('list2').value];
+	  temp_dict['label'] = d2[i]['languages'];
+      temp_dict['value'] = d2[i][document.getElementById('list2').value];
       temp_dict ['color'] = pircolors[i] ;
       fdata['data']['content'].push(temp_dict);
+	
     }   
 }
-
+//console.log(fdata);
 var pie = new d3pie("pie2", fdata);
 piedata['data']['content']=[];
 }
@@ -261,7 +296,7 @@ function getdetials()
   if (document.getElementById('list1').value == document.getElementById('list2').value)
   {
     $("#alert_message").show();
-    document.getElementById("alert_message").innerHTML= "Please pick 2 different companies";
+    document.getElementById("alert_message").innerHTML= "Please pick different companies";
     return;
   }
   else
