@@ -164,7 +164,7 @@ hGsvg.append("text")
     .attr("font-size","8px")
     .attr("text-anchor", "end")
     .attr("x","-20%")
-    .attr("y", "-15%")
+    .attr("y", "-12%")
     .attr("dy", ".75em")
     .attr("transform", "rotate(-90)")
     .text("Count -->");
