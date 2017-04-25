@@ -10,7 +10,7 @@ function dashboardcallapi(current_lang){
  $('.nav-tabs a[href="#secondtab"]').tab('show');  
 
   document.getElementById('dashboardchart_currlang').innerHTML= "Projects in "+current_lang ; 
-  console.log("dashboard Callapi function called");
+  // console.log("dashboard Callapi function called");
   postdata={
     title:"dashboard",
     lang:current_lang
@@ -74,8 +74,8 @@ function click_row(button_id){
 function dashboard()
 
 {
-  console.log("insdie dashboard")
-  console.log(fData);
+  // console.log("insdie dashboard")
+  // console.log(fData);
 
   var tF = ['Project Name','Project Id','Owner Type','Stars','Forks','Contributing Authors','Duration(Months)','Start Time','End Time'].map(function(d){ 
     return {type:d, stats: ""}; 
@@ -84,8 +84,8 @@ function dashboard()
     // calculate total frequency by state for all segment.
     var sF = fData.map(function(d){
       temp_key  =  Object.values(d);
-      console.log(temp_key[0]);
-      console.log(d.State);
+      // console.log(temp_key[0]);
+      // console.log(d.State);
       return [temp_key[0],d.total];});
 
     // create the histogram.
@@ -263,7 +263,7 @@ hGsvg.append("text")
         leg.update = function(nD,name){
             // update the data attached to the row elements.
             var tp=Object.values(nD);
-            console.log(tp[1].stats);
+            // console.log(tp[1].stats);
 
       //['contrib_auth','end_time','forks','owner_type','project_id','stars','start_time','Duration']
       
@@ -275,9 +275,9 @@ hGsvg.append("text")
 
       var days = Math.floor(diff/day);
       var months = Math.floor(days/31);
-      console.log(months);
-      console.log(nD);
-      console.log(name[0]);
+      // console.log(months);
+      // console.log(nD);
+      // console.log(name[0]);
 
       new_data[0].stats=name[0];
       new_data[1].stats=tp[4].stats;
@@ -289,7 +289,7 @@ hGsvg.append("text")
       new_data[7].stats=tp[6].stats;
       new_data[8].stats=tp[1].stats;
       
-      console.log(new_data);
+      // console.log(new_data);
       var l = legend.select("tbody").selectAll("tr").data(new_data);
 
             // update the frequencies.

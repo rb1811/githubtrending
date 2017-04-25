@@ -105,23 +105,23 @@ piedata= {
                 .attr('width', labelArea + width + width)
                 .attr('height', height);
 
-        var xFrom = d3.scale.linear()
+        var xFrom = d3.scaleLinear()
        
             .domain([0, 50])
         .range([0, width]);
-
-        var xTo = d3.scale.linear()
+        
+        var xTo = d3.scaleLinear()
        
         .domain([0, 50])
         .range([0, width]);
        
 
-        var y = d3.scale.ordinal()
+        var y = d3.scaleOrdinal()
         .domain(data.map(function (d){
             return d.languages
           
         }))
-        .rangeBands([20, height]);    
+        .range([20, height]);    
 
          var yPosByIndex = function (d) {
          return y(d.languages);
@@ -144,7 +144,7 @@ piedata= {
                     return xFrom(d[lCol]);
             
                 })
-                .attr("height", y.rangeBand());
+                .attr("height", y.bandwidth());
             
         chart.selectAll("text.leftscore")
                 .data(data)
@@ -153,7 +153,7 @@ piedata= {
                     return width - xFrom(d[lCol])-40;
                 })
                 .attr("y", function (d) {
-                    return y(d.languages) + y.rangeBand() / 2;
+                    return y(d.languages) + y.bandwidth() / 2;
                     
                 })
                 .attr("dx", "20")
@@ -167,7 +167,7 @@ piedata= {
                 .enter().append("text")
                 .attr("x", (labelArea / 2) + width)
                 .attr("y", function (d) {
-                    return y(d.languages) + y.rangeBand() / 2;
+                    return y(d.languages) + y.bandwidth() / 2;
                    
                 })
                 .attr("dy", ".20em")
@@ -190,7 +190,7 @@ piedata= {
                     return xTo(d[rCol]);
                     
                 })
-                .attr("height", y.rangeBand());
+                .attr("height", y.bandwidth());
         
          chart.selectAll("text.score")
                 .data(data)
@@ -199,7 +199,7 @@ piedata= {
                     return xTo(d[rCol]) + rightOffset+40;
                 })
                 .attr("y", function (d) {
-                    return y(d.languages) + y.rangeBand() / 2;
+                    return y(d.languages) + y.bandwidth() / 2;
            
                 })
                 .attr("dx", -5)
@@ -224,7 +224,7 @@ function pie1(data)
 var d1=data;
 			var list0=(document.getElementById('list1').value);
 			//console.log(list1);
-			console.log(d1);
+			// console.log(d1);
 			d1.sort(function(a, b) {
 			   
 			    return d3.descending(parseFloat(a[list0]) , parseFloat(b[list0]));
@@ -258,7 +258,7 @@ function pie2(data)
 {
 var d2=data
 var list0=(document.getElementById('list2').value);
-console.log(d2);
+// console.log(d2);
 d2.sort(function(a, b) {
    
     return d3.descending(parseFloat(a[list0]), parseFloat(b[list0]));
@@ -319,8 +319,9 @@ function getdetials()
               // d3.selectAll("svg > *").remove();
               pie1(data['data']);
               pie2(data['data']);
+              // doublebarchart(data['data']);
             },
-              // doublebarchart(data['data']);},
+              
              contentType: "application/json",
              dataType: 'json'
           });
