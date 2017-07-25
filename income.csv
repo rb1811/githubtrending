@@ -1,16 +1,16 @@
-name	poverty
-Albany	26.8
-Allegany	9.1
-Bronx	4.3
-Broome	9.9
-Cattaraugus	17.4
-Cayuga	6.9
-Chautauqua	10.7
-Chemung	5.8
-Chenango	6.1
-Clinton	5.9
-Columbia	15.4
-Cortland	14.5
-Delaware	4
-Dutchess	27.2
-Erie	32.2
+name,poverty
+Albany,26.8
+Allegany,9.1
+Bronx,4.3
+Broome,9.9
+Cattaraugus,17.4
+Cayuga,6.9
+Chautauqua,10.7
+Chemung,5.8
+Chenango,6.1
+Clinton,5.9
+Columbia,15.4
+Cortland,14.5
+Delaware,4
+Dutchess,27.2
+Erie,32.2
